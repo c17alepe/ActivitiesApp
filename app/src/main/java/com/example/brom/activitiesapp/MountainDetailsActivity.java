@@ -14,15 +14,16 @@ public class MountainDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //sets the new view to the activity_mountaindetails layout
         setContentView(R.layout.activity_mountaindetails);
 
+        //gets the input from previous screen and outputs into textview in the card
         Intent intent = getIntent();
-        String name = intent.getStringExtra("berg");
-
-        //LinearLayout LL = findViewById(R.id.card);
+        String textinfo = intent.getStringExtra("berg");
 
         TextView textView = findViewById(R.id.textView);
-        textView.setText(name);
+        textView.setText(textinfo);
 
 
     }

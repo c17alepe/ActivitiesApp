@@ -19,30 +19,37 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Mountain> mountainData=new ArrayList<>();
 
+    //Formats array into the Mountain class
     Mountain Matterhorn = new Mountain("Matterhorn", "Alps", 4478);
     Mountain Mont_Blanc = new Mountain("Mont Blanc", "Alps", 4808);
     Mountain Denali = new Mountain("Denali", "Alaska", 6190);
 
+    //Creates an array for list
     ArrayList<String> listData=new ArrayList<>(Arrays.asList(mountainNames));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //creates the listview
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this, R.layout.list_item_textview,R.id.list_item_textview, listData);
 
+        //adds Mountains to mountainData array
         mountainData.add(Matterhorn);
         mountainData.add(Mont_Blanc);
         mountainData.add(Denali);
 
+        //outputs the array
         ListView listView=(ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                //creates new intent
                 Intent mInfo = new Intent(MainActivity.this, MountainDetailsActivity.class);
 
+                //creates string to be output in the new intent
                 String bergData= ""+ mountainData.get(position).Name()+ " \n " +  mountainData.get(position).Location()+ "\n " + mountainData.get(position).Height();
                 mInfo.putExtra("berg", bergData);
 
