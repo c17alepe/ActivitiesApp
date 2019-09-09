@@ -12,8 +12,7 @@
         <activity
             android:name=".MountainDetailsActivity"
             android:label="MountainDetailsActivity"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.brom.activitiesapp.MainActivity" />

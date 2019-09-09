@@ -7,7 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import android.content.Intent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,8 +16,14 @@ public class MainActivity extends AppCompatActivity {
     private String[] mountainLocations = {"Alps","Alps","Alaska"};
     private int[] mountainHeights ={4478,4808,6190};
     // Create ArrayLists from the raw data above and use these lists when populating your ListView.
-    private ArrayList<String> listData=new ArrayList<>(Arrays.asList(mountainNames));
 
+    ArrayList<Mountain> mountainData=new ArrayList<>();
+
+    Mountain Matterhorn = new Mountain("Matterhorn", "Alps", 4478);
+    Mountain Mont_Blanc = new Mountain("Mont Blanc", "Alps", 4808);
+    Mountain Denali = new Mountain("Denali", "Alaska", 6190);
+
+    ArrayList<String> listData=new ArrayList<>(Arrays.asList(mountainNames));
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,13 +31,22 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter=new ArrayAdapter<String>(this, R.layout.list_item_textview,R.id.list_item_textview, listData);
 
+        mountainData.add(Matterhorn);
+        mountainData.add(Mont_Blanc);
+        mountainData.add(Denali);
+
         ListView listView=(ListView) findViewById(R.id.listview);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                Intent mInfo = new Intent(MainActivity.this, MountainDetailsActivity.class);
 
+                String bergData= ""+ mountainData.get(position).Name()+ " \n " +  mountainData.get(position).Location()+ "\n " + mountainData.get(position).Height();
+                mInfo.putExtra("berg", bergData);
+
+                startActivity(mInfo);
             }
         });
 
